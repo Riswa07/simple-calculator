@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,13 +8,75 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <link href="style.css" rel="stylesheet">
+    
+    <!-- Tailwind CSS Script -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Outfit', 'sans-serif'],
+                    },
+                    keyframes: {
+                        gradientBG: {
+                            '0%, 100%': { backgroundPosition: '0% 50%' },
+                            '50%': { backgroundPosition: '100% 50%' },
+                        }
+                    },
+                    animation: {
+                        gradientBG: 'gradientBG 15s ease infinite',
+                    },
+                    backgroundSize: {
+                        '400': '400% 400%',
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Custom Tailwind Components -->
+    <style type="text/tailwindcss">
+        @layer components {
+            .btn {
+                @apply border-none rounded-[12px] text-[1.4rem] font-medium cursor-pointer py-[15px] transition-all duration-300 flex justify-center items-center shadow-[0_4px_10px_rgba(0,0,0,0.05)] text-white;
+            }
+            .btn:hover {
+                @apply -translate-y-[2px] shadow-[0_6px_15px_rgba(0,0,0,0.15)];
+            }
+            .btn:active {
+                @apply translate-y-[1px];
+            }
+            
+            .btn-number {
+                @apply bg-white/10 hover:bg-white/25 active:bg-white/10;
+            }
+            .btn-operator {
+                @apply bg-[#ff9f43]/60 hover:bg-[#ff9f43]/80;
+            }
+            .btn-action {
+                @apply bg-[#54a0ff]/40 hover:bg-[#54a0ff]/60;
+            }
+            .btn-equal {
+                @apply bg-[#10ac84]/80 hover:bg-[#10ac84] shadow-[0_4px_15px_rgba(16,172,132,0.3)];
+            }
+            .btn-equal:hover {
+                @apply shadow-[0_6px_15px_rgba(16,172,132,0.4)];
+            }
+        }
+    </style>
 </head>
 
-<body>
-    <div class="calculator">
-        <input type="text" id="display" readonly placeholder="0">
-        <div class="buttons">
+<body class="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#FF6B6B] to-[#556270] bg-400 animate-gradientBG font-sans m-0 p-0 text-white">
+    <!-- Calculator Container -->
+    <div class="bg-white/10 backdrop-blur-[20px] border border-white/20 shadow-[0_15px_35px_rgba(0,0,0,0.2)] rounded-[20px] p-[25px] w-[320px]">
+        
+        <!-- Display Screen -->
+        <input type="text" id="display" readonly placeholder="0" 
+            class="w-full h-[80px] border-none bg-transparent text-white text-[2.5rem] text-right p-[10px] mb-[20px] outline-none border-b border-white/20 font-light placeholder:text-white/50">
+        
+        <!-- Keypad -->
+        <div class="grid grid-cols-4 gap-[12px]">
             <button onclick="clearDisplay()" class="btn btn-action">C</button>
             <button onclick="backspace()" class="btn btn-action">⌫</button>
             <button onclick="displayValue('%')" class="btn btn-action">%</button>
@@ -45,5 +106,4 @@
 
     <script src="script.js"></script>
 </body>
-
 </html>
